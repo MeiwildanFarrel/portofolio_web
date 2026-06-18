@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meiwildan Muhammad Farrel — AI &amp; Web Developer</title>
+  <meta name="description" content="Portfolio of Meiwildan Muhammad Farrel — Information Systems undergraduate, AI &amp; Web Developer. Gold Medalist, award-winning projects, and registered software contributions." />
+
+  <!-- Google Fonts: Inter (body) + Space Grotesk (headings) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #111118;
+      --bg-card: #16161f;
+      --accent-blue: #3b82f6;
+      --accent-teal: #06b6d4;
+      --accent-purple: #8b5cf6;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --border: rgba(255, 255, 255, 0.08);
+      --glow-blue: 0 0 20px rgba(59, 130, 246, 0.3);
+      --glow-teal: 0 0 20px rgba(6, 182, 212, 0.3);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: auto; } /* Lenis controls scroll */
+
+    body {
+      margin: 0;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, .font-display {
+      font-family: 'Space Grotesk', 'Inter', sans-serif;
+      letter-spacing: -0.02em;
+    }
+
+    ::selection { background: rgba(59, 130, 246, 0.35); color: #fff; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: var(--bg-primary); }
+    ::-webkit-scrollbar-thumb { background: #24242f; border-radius: 8px; }
+    ::-webkit-scrollbar-thumb:hover { background: #2f2f3d; }
+
+    /* ---------- Layout helpers ---------- */
+    .section-pad { padding: 96px 0; }
+    .container-x { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--accent-teal);
+    }
+    .eyebrow::before {
+      content: ""; width: 28px; height: 1px;
+      background: linear-gradient(90deg, var(--accent-teal), transparent);
+    }
+
+    .section-title {
+      font-size: clamp(30px, 5vw, 44px);
+      font-weight: 700; margin: 14px 0 6px;
+      background: linear-gradient(90deg, #fff 0%, #c7d2fe 60%, #93c5fd 100%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .section-sub { color: var(--text-secondary); font-size: 16px; max-width: 620px; }
+
+    /* ---------- Card ---------- */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent-blue);
+      box-shadow: var(--glow-blue);
+    }
+
+    /* ---------- Navbar ---------- */
+    .navbar {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(10, 10, 15, 0.6);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-link {
+      position: relative; color: var(--text-secondary);
+      font-size: 14px; font-weight: 500; padding: 6px 2px;
+      transition: color 0.25s ease;
+    }
+    .nav-link:hover { color: var(--text-primary); }
+    .nav-link.active { color: var(--accent-blue); }
+    .nav-link.active::after {
+      content: ""; position: absolute; left: 0; bottom: -4px;
+      width: 100%; height: 2px; border-radius: 2px;
+      background: var(--accent-blue); box-shadow: var(--glow-blue);
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 14px; font-weight: 500; border-radius: 10px;
+      padding: 11px 20px; cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+    }
+    .btn-filled {
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-teal));
+      color: #fff; border: 1px solid transparent;
+    }
+    .btn-filled:hover { transform: translateY(-2px); box-shadow: var(--glow-blue); }
+    .btn-outline {
+      background: transparent; color: var(--text-primary);
+      border: 1px solid var(--accent-blue);
+    }
+    .btn-outline:hover { background: rgba(59,130,246,0.12); box-shadow: var(--glow-blue); transform: translateY(-2px); }
+
+    /* ---------- Hero ---------- */
+    #vanta-bg { position: absolute; inset: 0; z-index: 0; }
+    .hero-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background: radial-gradient(ellipse at 50% 40%, transparent 0%, rgba(10,10,15,0.55) 70%, var(--bg-primary) 100%);
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 2; }
+
+    .avatar-ring {
+      width: 120px; height: 120px; border-radius: 50%;
+      padding: 3px;
+      background: conic-gradient(from 0deg, var(--accent-blue), var(--accent-teal), var(--accent-purple), var(--accent-blue));
+      animation: spin 6s linear infinite;
+      display: flex; align-items: center; justify-content: center;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .avatar-inner {
+      width: 100%; height: 100%; border-radius: 50%;
+      background: var(--bg-secondary);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Space Grotesk'; font-weight: 700; font-size: 38px;
+      color: var(--text-primary); letter-spacing: 0.02em;
+      animation: spin 6s linear infinite reverse; /* keep text upright-ish */
+    }
+
+    .label-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 14px; border-radius: 999px;
+      font-size: 13px; color: var(--text-secondary);
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+    }
+    .pulse-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #22c55e; box-shadow: 0 0 0 0 rgba(34,197,94,0.6);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(34,197,94,0.5); }
+      70% { box-shadow: 0 0 0 8px rgba(34,197,94,0); }
+      100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+    }
+
+    .typed-cursor { color: var(--accent-teal); }
+
+    .scroll-indicator {
+      position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+      z-index: 2; color: var(--text-secondary);
+      animation: bob 1.8s ease-in-out infinite;
+    }
+    @keyframes bob { 0%,100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 8px); } }
+
+    /* ---------- Badges ---------- */
+    .tech-badge {
+      font-size: 12px; padding: 4px 10px; border-radius: 6px;
+      background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+    .tag-badge {
+      font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 999px;
+      letter-spacing: 0.03em; text-transform: uppercase;
+    }
+    .tag-featured { background: rgba(59,130,246,0.15); color: #93c5fd; border: 1px solid rgba(59,130,246,0.35); }
+    .tag-ai { background: rgba(139,92,246,0.15); color: #c4b5fd; border: 1px solid rgba(139,92,246,0.35); }
+    .tag-award { background: rgba(234,179,8,0.15); color: #fde68a; border: 1px solid rgba(234,179,8,0.35); }
+    .tag-gold { background: rgba(234,179,8,0.18); color: #fcd34d; border: 1px solid rgba(234,179,8,0.4); }
+    .tag-research { background: rgba(6,182,212,0.15); color: #67e8f9; border: 1px solid rgba(6,182,212,0.35); }
+    .tag-copyright { background: rgba(148,163,184,0.15); color: #cbd5e1; border: 1px solid rgba(148,163,184,0.3); }
+
+    .icon-circle {
+      width: 44px; height: 44px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(59,130,246,0.12); color: var(--accent-blue);
+      border: 1px solid rgba(59,130,246,0.25);
+    }
+
+    /* ---------- Skill pill ---------- */
+    .skill-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 14px; padding: 9px 16px; border-radius: 999px;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      color: var(--text-primary); transition: all 0.25s ease;
+    }
+    .skill-pill:hover { border-color: var(--accent-teal); box-shadow: var(--glow-teal); transform: translateY(-2px); }
+
+    /* ---------- Timeline ---------- */
+    .timeline { position: relative; padding-left: 32px; }
+    .timeline::before {
+      content: ""; position: absolute; left: 7px; top: 6px; bottom: 6px;
+      width: 2px; background: linear-gradient(180deg, var(--accent-blue), rgba(59,130,246,0.1));
+    }
+    .timeline-item { position: relative; padding-bottom: 28px; }
+    .timeline-item::before {
+      content: ""; position: absolute; left: -32px; top: 4px;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: var(--bg-primary); border: 3px solid var(--accent-blue);
+      box-shadow: var(--glow-blue);
+    }
+
+    /* Gold glow card */
+    .gold-glow { border-color: rgba(234,179,8,0.4) !important; }
+    .gold-glow:hover { box-shadow: 0 0 24px rgba(234,179,8,0.28) !important; border-color: rgba(234,179,8,0.6) !important; }
+
+    /* Reveal initial state (GSAP sets final) */
+    .reveal { opacity: 0; }
+
+    /* Mobile menu */
+    #mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+    #mobile-menu.open { max-height: 360px; }
+
+    @media (max-width: 768px) {
+      .section-pad { padding: 72px 0; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===================== NAVBAR ===================== -->
+  <nav class="navbar">
+    <div class="container-x flex items-center justify-between" style="height:64px;">
+      <a href="#hero" class="font-display font-bold text-xl" style="color: var(--accent-blue);">MF</a>
+
+      <div class="hidden md:flex items-center gap-7">
+        <a href="#about" class="nav-link" data-nav="about">About</a>
+        <a href="#projects" class="nav-link" data-nav="projects">Projects</a>
+        <a href="#achievements" class="nav-link" data-nav="achievements">Achievements</a>
+        <a href="#skills" class="nav-link" data-nav="skills">Skills</a>
+        <a href="#experience" class="nav-link" data-nav="experience">Experience</a>
+        <a href="#contact" class="nav-link" data-nav="contact">Contact</a>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="#" class="btn btn-outline hidden sm:inline-flex">Download CV</a>
+        <button id="hamburger" class="md:hidden text-slate-200" aria-label="Open menu">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="md:hidden border-t" style="border-color: var(--border);">
+      <div class="container-x flex flex-col gap-1 py-3">
+        <a href="#about" class="nav-link py-2" data-mobile>About</a>
+        <a href="#projects" class="nav-link py-2" data-mobile>Projects</a>
+        <a href="#achievements" class="nav-link py-2" data-mobile>Achievements</a>
+        <a href="#skills" class="nav-link py-2" data-mobile>Skills</a>
+        <a href="#experience" class="nav-link py-2" data-mobile>Experience</a>
+        <a href="#contact" class="nav-link py-2" data-mobile>Contact</a>
+        <a href="#" class="btn btn-outline mt-2 justify-center">Download CV</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===================== HERO ===================== -->
+  <header id="hero" class="relative flex items-center justify-center" style="min-height: calc(100vh - 64px);">
+    <div id="vanta-bg"></div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content container-x text-center flex flex-col items-center">
+      <!-- Avatar -->
+      <!-- REPLACE: swap this div with <img> tag -->
+      <div id="hero-avatar" class="avatar-ring reveal mb-7">
+        <div class="avatar-inner">MF</div>
+      </div>
+
+      <span id="hero-label" class="label-pill reveal mb-6">
+        <span class="pulse-dot"></span> Available for opportunities
+      </span>
+
+      <h1 id="hero-name" class="reveal font-display font-bold" style="font-size: clamp(40px, 8vw, 72px); line-height: 1.05;">
+        Meiwildan Muhammad Farrel
+      </h1>
+
+      <div id="hero-typed-wrap" class="reveal mt-4" style="font-size: clamp(20px, 4vw, 30px); font-weight:600; color: var(--text-primary);">
+        <span style="color: var(--text-secondary); font-weight:400;">I'm a </span>
+        <span id="typed" style="color: var(--accent-teal);"></span>
+      </div>
+
+      <p id="hero-bio" class="reveal mt-5 section-sub mx-auto" style="font-size:17px;">
+        Information Systems undergraduate building AI-driven and web-based applications, recognized at national and international competitions.
+      </p>
+
+      <div id="hero-cta" class="flex flex-wrap items-center justify-center gap-4 mt-8">
+        <a href="#projects" class="btn btn-filled reveal">
+          View Projects
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#" class="btn btn-outline reveal">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          Download CV
+        </a>
+      </div>
+    </div>
+
+    <a href="#about" class="scroll-indicator" aria-label="Scroll down">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+    </a>
+  </header>
+
+  <!-- ===================== ABOUT ===================== -->
+  <section id="about" class="section-pad" style="background: var(--bg-primary);">
+    <div class="container-x">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <span class="eyebrow">About Me</span>
+          <h2 class="section-title">Turning ideas into intelligent products</h2>
+          <p class="text-slate-400 mt-4" style="color: var(--text-secondary);">
+            Information Systems undergraduate with hands-on experience building AI-driven and web-based applications, recognized at national and international competitions and conferences.
+          </p>
+          <p class="mt-4" style="color: var(--text-secondary);">
+            I'm aiming to grow into a project manager role by leading impactful AI and web development projects from concept to delivery — bridging the gap between technical execution and product vision.
+          </p>
+          <div class="mt-6 flex flex-col gap-2 text-sm" style="color: var(--text-secondary);">
+            <span>🎓 Telkom University Purwokerto &middot; 2023 – Present</span>
+            <span>⭐ GPA 3.95 / 4.00 &middot; One Pipe Fully-Funded Scholarship Awardee</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4" id="about-stats">
+          <div class="card reveal p-6">
+            <div class="icon-circle mb-3">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            </div>
+            <div class="font-display font-bold text-3xl">3.95</div>
+            <div class="text-sm mt-1" style="color: var(--text-secondary);">GPA / 4.00</div>
+          </div>
+          <div class="card reveal p-6 gold-glow">
+            <div class="icon-circle mb-3" style="background: rgba(234,179,8,0.12); color:#fcd34d; border-color: rgba(234,179,8,0.3);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M8.21 13.89 7 22l5-3 5 3-1.21-8.11"/></svg>
+            </div>
+            <div class="font-display font-bold text-3xl">1</div>
+            <div class="text-sm mt-1" style="color: var(--text-secondary);">Gold Medal</div>
+          </div>
+          <div class="card reveal p-6">
+            <div class="icon-circle mb-3">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6l2 4-3 2a14 14 0 0 0 6 6l2-3 4 2v6a2 2 0 0 1-2 2A18 18 0 0 1 2 5a2 2 0 0 1 0-2z" opacity="0"/><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+            </div>
+            <div class="font-display font-bold text-3xl">5+</div>
+            <div class="text-sm mt-1" style="color: var(--text-secondary);">Projects</div>
+          </div>
+          <div class="card reveal p-6">
+            <div class="icon-circle mb-3">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13l2 2 4-4"/></svg>
+            </div>
+            <div class="font-display font-bold text-3xl">3</div>
+            <div class="text-sm mt-1" style="color: var(--text-secondary);">Copyrights</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PROJECTS ===================== -->
+  <section id="projects" class="section-pad" style="background: var(--bg-secondary);">
+    <div class="container-x">
+      <span class="eyebrow">Portfolio</span>
+      <h2 class="section-title">Projects</h2>
+      <p class="section-sub">Featured work spanning AI platforms, computer vision, and decision-support research.</p>
+
+      <!-- Featured top 3 -->
+      <div class="grid md:grid-cols-2 gap-6 mt-10" id="projects-featured">
+
+        <!-- Aksara -->
+        <article class="card reveal p-7 flex flex-col">
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex flex-wrap gap-2">
+              <span class="tag-badge tag-featured">Featured</span>
+              <span class="tag-badge tag-ai">AI</span>
+            </div>
+            <a href="https://github.com/MeiwildanFarrel" target="_blank" rel="noopener" aria-label="GitHub" class="text-slate-400 hover:text-white transition">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.5v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 .1.8 1.7 2.6 1.2.1-.7.4-1.2.7-1.5-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 4.7 18 5 18 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.5 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
+            </a>
+          </div>
+          <h3 class="font-display font-semibold text-xl mt-4">Aksara — AI-Assisted Learning Platform</h3>
+          <span class="text-xs mt-1" style="color: var(--accent-teal);">2026</span>
+          <p class="mt-3 text-sm" style="color: var(--text-secondary);">
+            Conceived and developed an AI-assisted learning platform that turns uploaded course materials into skill trees, AI-generated quizzes, and explanations — using Retrieval-Augmented Generation (RAG) and Bayesian Knowledge Tracing to adapt content to each student's mastery level.
+          </p>
+          <div class="flex flex-wrap gap-2 mt-4 pt-4" style="border-top:1px solid var(--border);">
+            <span class="tech-badge">Next.js</span>
+            <span class="tech-badge">TypeScript</span>
+            <span class="tech-badge">Supabase</span>
+            <span class="tech-badge">Gemini Embeddings (RAG)</span>
+          </div>
+        </article>
+
+        <!-- SIVIO -->
+        <article class="card reveal p-7 flex flex-col">
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex flex-wrap gap-2">
+              <span class="tag-badge tag-featured">Featured</span>
+              <span class="tag-badge tag-ai">AI</span>
+              <span class="tag-badge tag-award">Award-Winning</span>
+            </div>
+            <a href="https://github.com/MeiwildanFarrel" target="_blank" rel="noopener" aria-label="GitHub" class="text-slate-400 hover:text-white transition">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.5v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 .1.8 1.7 2.6 1.2.1-.7.4-1.2.7-1.5-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 4.7 18 5 18 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.5 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
+            </a>
+          </div>
+          <h3 class="font-display font-semibold text-xl mt-4">SIVIO — AI Sign Language Video Call</h3>
+          <span class="text-xs mt-1" style="color: var(--accent-teal);">2025</span>
+          <p class="mt-3 text-sm" style="color: var(--text-secondary);">
+            Video call app detecting Indonesian Sign Language (BISINDO) in real time using computer vision and AI. Ranked Top 165 nationally in Telkom Group's Innovillage 2024. Registered copyright: EC002025047305.
+          </p>
+          <div class="flex flex-wrap gap-2 mt-4 pt-4" style="border-top:1px solid var(--border);">
+            <span class="tech-badge">Computer Vision</span>
+            <span class="tech-badge">AI/ML</span>
+            <span class="tech-badge">Real-time Video Processing</span>
+          </div>
+        </article>
+
+        <!-- LogiCheck -->
+        <article class="card reveal p-7 flex flex-col md:col-span-2">
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex flex-wrap gap-2">
+              <span class="tag-badge tag-featured">Featured</span>
+              <span class="tag-badge tag-gold">Gold Medal</span>
+            </div>
+            <a href="https://github.com/MeiwildanFarrel" target="_blank" rel="noopener" aria-label="GitHub" class="text-slate-400 hover:text-white transition">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.5v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 .1.8 1.7 2.6 1.2.1-.7.4-1.2.7-1.5-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 4.7 18 5 18 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.5 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
+            </a>
+          </div>
+          <h3 class="font-display font-semibold text-xl mt-4">LogiCheck — Conversational AI Coach for Logical Reasoning</h3>
+          <span class="text-xs mt-1" style="color: var(--accent-teal);">2025</span>
+          <p class="mt-3 text-sm" style="color: var(--text-secondary); max-width: 760px;">
+            AI-powered conversational tool helping users strengthen logical reasoning and resist misinformation. Awarded a Gold Medal at ISIF 2025, Bali, Indonesia.
+          </p>
+          <div class="flex flex-wrap gap-2 mt-4 pt-4" style="border-top:1px solid var(--border);">
+            <span class="tech-badge">Conversational AI</span>
+            <span class="tech-badge">NLP</span>
+          </div>
+        </article>
+      </div>
+
+      <!-- Smaller bottom 2 -->
+      <div class="grid md:grid-cols-2 gap-6 mt-6" id="projects-more">
+        <article class="card reveal p-6">
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex flex-wrap gap-2">
+              <span class="tag-badge tag-research">Research</span>
+              <span class="tag-badge tag-copyright">Published</span>
+            </div>
+          </div>
+          <h3 class="font-display font-semibold text-lg mt-4">MOORA-Based Decision Support for School Selection</h3>
+          <span class="text-xs mt-1" style="color: var(--accent-teal);">2024</span>
+          <p class="mt-3 text-sm" style="color: var(--text-secondary);">
+            Multi-criteria decision support model using the MOORA method to rank international schools in Jakarta. Presented at the CENTIVE 2024 conference.
+          </p>
+          <div class="flex flex-wrap gap-2 mt-4 pt-4" style="border-top:1px solid var(--border);">
+            <span class="tech-badge">Python</span>
+            <span class="tech-badge">MOORA Algorithm</span>
+            <span class="tech-badge">Data Analysis</span>
+          </div>
+        </article>
+
+        <article class="card reveal p-6">
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex flex-wrap gap-2">
+              <span class="tag-badge tag-copyright">Copyrighted</span>
+            </div>
+            <a href="https://github.com/MeiwildanFarrel" target="_blank" rel="noopener" aria-label="GitHub" class="text-slate-400 hover:text-white transition">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.5v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 .1.8 1.7 2.6 1.2.1-.7.4-1.2.7-1.5-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 4.7 18 5 18 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.5 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
+            </a>
+          </div>
+          <h3 class="font-display font-semibold text-lg mt-4">Registered Software Contributions</h3>
+          <span class="text-xs mt-1" style="color: var(--accent-teal);">2025 – 2026</span>
+          <p class="mt-3 text-sm" style="color: var(--text-secondary);">
+            Contributed to two apps registered with Indonesia's DJKI: a sports gamification app (EC002025171877) and a BUMDes village finance web app (EC002026003799).
+          </p>
+          <div class="flex flex-wrap gap-2 mt-4 pt-4" style="border-top:1px solid var(--border);">
+            <span class="tech-badge">Web Development</span>
+            <span class="tech-badge">Full Stack</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ACHIEVEMENTS ===================== -->
+  <section id="achievements" class="section-pad" style="background: var(--bg-primary);">
+    <div class="container-x">
+      <span class="eyebrow">Recognition</span>
+      <h2 class="section-title">Achievements</h2>
+      <p class="section-sub">Awards and recognition from national and international competitions and conferences.</p>
+
+      <div class="grid sm:grid-cols-2 gap-6 mt-10" id="achievement-grid">
+        <!-- Gold -->
+        <div class="card reveal p-6 flex gap-4 gold-glow">
+          <div class="icon-circle shrink-0" style="background: rgba(234,179,8,0.14); color:#fcd34d; border-color: rgba(234,179,8,0.35);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M8.21 13.89 7 22l5-3 5 3-1.21-8.11"/></svg>
+          </div>
+          <div>
+            <h3 class="font-display font-semibold text-lg">Gold Medal</h3>
+            <p class="text-sm mt-1" style="color: var(--text-secondary);">International Science and Invention Fair (ISIF) 2025 — Education Category, LogiCheck project.</p>
+            <span class="text-xs mt-2 inline-block" style="color: var(--accent-teal);">Bali, Indonesia · Nov 2025</span>
+          </div>
+        </div>
+
+        <!-- 2nd Best Presentation -->
+        <div class="card reveal p-6 flex gap-4">
+          <div class="icon-circle shrink-0">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15a7 7 0 0 0 7-7V3H5v5a7 7 0 0 0 7 7z"/><path d="M12 15v4M8 21h8M5 3H3v2a4 4 0 0 0 4 4M19 3h2v2a4 4 0 0 1-4 4"/></svg>
+          </div>
+          <div>
+            <h3 class="font-display font-semibold text-lg">2nd Best Presentation</h3>
+            <p class="text-sm mt-1" style="color: var(--text-secondary);">SUT GPBL: Sustainable City (Online) — Suranaree University of Technology, Thailand.</p>
+            <span class="text-xs mt-2 inline-block" style="color: var(--accent-teal);">Thailand · Jun 2025</span>
+          </div>
+        </div>
+
+        <!-- Top 165 -->
+        <div class="card reveal p-6 flex gap-4">
+          <div class="icon-circle shrink-0">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15 9 22 9.5 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.5 9 9"/></svg>
+          </div>
+          <div>
+            <h3 class="font-display font-semibold text-lg">Top 165 Social Project</h3>
+            <p class="text-sm mt-1" style="color: var(--text-secondary);">Innovillage by Telkom Group (2024) — AI-based sign language video call platform SIVIO, national competition.</p>
+            <span class="text-xs mt-2 inline-block" style="color: var(--accent-teal);">National · 2024</span>
+          </div>
+        </div>
+
+        <!-- CENTIVE -->
+        <div class="card reveal p-6 flex gap-4">
+          <div class="icon-circle shrink-0">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <div>
+            <h3 class="font-display font-semibold text-lg">Co-Author &amp; Presenter</h3>
+            <p class="text-sm mt-1" style="color: var(--text-secondary);">CENTIVE 2024 National Conference — MOORA method paper, 4th National Conference on Informatics &amp; Engineering.</p>
+            <span class="text-xs mt-2 inline-block" style="color: var(--accent-teal);">National Conference · 2024</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SKILLS ===================== -->
+  <section id="skills" class="section-pad" style="background: var(--bg-secondary);">
+    <div class="container-x">
+      <span class="eyebrow">Toolbox</span>
+      <h2 class="section-title">Skills &amp; Tools</h2>
+      <p class="section-sub">Technologies and tools I use to design, build, and ship.</p>
+
+      <div class="grid md:grid-cols-3 gap-6 mt-10">
+        <div class="card p-6">
+          <h3 class="font-display font-semibold text-lg mb-4">Programming</h3>
+          <div class="flex flex-wrap gap-2 skill-group">
+            <span class="skill-pill reveal">Python</span>
+            <span class="skill-pill reveal">PHP</span>
+            <span class="skill-pill reveal">JavaScript</span>
+            <span class="skill-pill reveal">HTML</span>
+            <span class="skill-pill reveal">CSS</span>
+            <span class="skill-pill reveal">MySQL</span>
+          </div>
+        </div>
+
+        <div class="card p-6">
+          <h3 class="font-display font-semibold text-lg mb-4">Design</h3>
+          <div class="flex flex-wrap gap-2 skill-group">
+            <span class="skill-pill reveal">Figma</span>
+            <span class="skill-pill reveal">Wireframing</span>
+            <span class="skill-pill reveal">Prototyping</span>
+          </div>
+        </div>
+
+        <div class="card p-6">
+          <h3 class="font-display font-semibold text-lg mb-4">Tools &amp; Creative</h3>
+          <div class="flex flex-wrap gap-2 skill-group">
+            <span class="skill-pill reveal">Git</span>
+            <span class="skill-pill reveal">GitHub</span>
+            <span class="skill-pill reveal">VS Code</span>
+            <span class="skill-pill reveal">Video Editing</span>
+            <span class="skill-pill reveal">Content Creation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== EXPERIENCE ===================== -->
+  <section id="experience" class="section-pad" style="background: var(--bg-primary);">
+    <div class="container-x">
+      <span class="eyebrow">Journey</span>
+      <h2 class="section-title">Experience</h2>
+      <p class="section-sub">Professional and organizational roles that shaped how I build and collaborate.</p>
+
+      <div class="grid md:grid-cols-2 gap-12 mt-10">
+        <!-- Work -->
+        <div>
+          <h3 class="font-display font-semibold text-xl mb-6">Work Experience</h3>
+          <div class="timeline">
+            <div class="timeline-item reveal">
+              <h4 class="font-semibold">Content Creator Intern</h4>
+              <span class="text-sm" style="color: var(--accent-teal);">Dilesin Academy · Jan – Mar 2024</span>
+              <p class="text-sm mt-2" style="color: var(--text-secondary);">Created advertising and promotional content across platforms; produced posters and short videos for brand communication.</p>
+            </div>
+            <div class="timeline-item reveal">
+              <h4 class="font-semibold">Lab Assistant — Algorithm &amp; Programming</h4>
+              <span class="text-sm" style="color: var(--accent-teal);">Telkom University · Sep 2024 – Jan 2025</span>
+              <p class="text-sm mt-2" style="color: var(--text-secondary);">Assisted students in programming logic and problem-solving using Python; guided practical lab sessions.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Organizational -->
+        <div>
+          <h3 class="font-display font-semibold text-xl mb-6">Organizational Experience</h3>
+          <div class="timeline">
+            <div class="timeline-item reveal">
+              <h4 class="font-semibold">Staff of Information Media Intern</h4>
+              <span class="text-sm" style="color: var(--accent-teal);">HMSI · Nov 2023 – Jan 2024</span>
+              <p class="text-sm mt-2" style="color: var(--text-secondary);">Managed internal media and created visual content for social media.</p>
+            </div>
+            <div class="timeline-item reveal">
+              <h4 class="font-semibold">Head of Information &amp; Communication</h4>
+              <span class="text-sm" style="color: var(--accent-teal);">International Volunteer · Jun 2024 – Present</span>
+              <p class="text-sm mt-2" style="color: var(--text-secondary);">Led communication materials, public outreach, and content production.</p>
+            </div>
+            <div class="timeline-item reveal">
+              <h4 class="font-semibold">Committee Member — The Index</h4>
+              <span class="text-sm" style="color: var(--accent-teal);">Telkom University · Sep 2024 – Nov 2025</span>
+              <p class="text-sm mt-2" style="color: var(--text-secondary);">Organized The Index 2024 &amp; 2025, international cultural exchange events.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CONTACT ===================== -->
+  <section id="contact" class="section-pad" style="background: var(--bg-secondary);">
+    <div class="container-x text-center flex flex-col items-center">
+      <span class="eyebrow">Get in touch</span>
+      <h2 class="section-title">Let's build something together</h2>
+      <p class="section-sub mx-auto">Open to collaborations, opportunities, and conversations about AI and web development.</p>
+
+      <div class="flex flex-wrap items-center justify-center gap-4 mt-8">
+        <a href="mailto:farrelwldan@gmail.com" class="btn btn-filled">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+          Email Me
+        </a>
+        <a href="https://linkedin.com/in/meiwildan-muhammad-farrel" target="_blank" rel="noopener" class="btn btn-outline">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 17V10.4H6.16V17h2.18zM7.25 9.5a1.27 1.27 0 1 0 0-2.54 1.27 1.27 0 0 0 0 2.54zM18 17v-3.62c0-1.94-1.04-2.84-2.42-2.84-1.12 0-1.62.62-1.9 1.05V10.4h-2.18V17h2.18v-3.67c0-.97.18-1.9 1.38-1.9 1.18 0 1.2 1.1 1.2 1.96V17H18z"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/MeiwildanFarrel" target="_blank" rel="noopener" class="btn btn-outline">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.5v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 .1.8 1.7 2.6 1.2.1-.7.4-1.2.7-1.5-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 4.7 18 5 18 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.5 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
+          GitHub
+        </a>
+      </div>
+
+      <div class="mt-8 text-sm" style="color: var(--text-secondary);">
+        <span>farrelwldan@gmail.com</span>
+        <span class="mx-2">·</span>
+        <span>+62 812-1566-2436</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="py-8 text-center" style="border-top:1px solid var(--border); background: var(--bg-primary);">
+    <p class="text-sm" style="color: var(--text-secondary);">© 2026 Meiwildan Muhammad Farrel · Built with care.</p>
+  </footer>
+
+  <!-- ===================== SCRIPTS ===================== -->
+  <!-- Three.js (required by Vanta) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <!-- Vanta NET -->
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <!-- Lenis smooth scroll -->
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+  <!-- Typed.js -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.js"></script>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+
+      /* ---------- Vanta NET background ---------- */
+      if (window.VANTA && window.VANTA.NET) {
+        try {
+          VANTA.NET({
+            el: '#vanta-bg',
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.0,
+            minWidth: 200.0,
+            scale: 1.0,
+            scaleMobile: 1.0,
+            color: 0x3b82f6,
+            backgroundColor: 0x0a0a0f,
+            points: 12.0,
+            maxDistance: 22.0,
+            spacing: 18.0
+          });
+        } catch (e) { console.warn('Vanta init failed:', e); }
+      }
+
+      /* ---------- Lenis smooth scroll + GSAP sync ---------- */
+      var lenis = null;
+      if (window.Lenis) {
+        lenis = new Lenis();
+        if (window.gsap) {
+          gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
+          gsap.ticker.lagSmoothing(0);
+        } else {
+          function raf(t) { lenis.raf(t); requestAnimationFrame(raf); }
+          requestAnimationFrame(raf);
+        }
+      }
+
+      /* Anchor links via Lenis */
+      document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          var id = this.getAttribute('href');
+          if (id === '#' || !id) return;
+          var target = document.querySelector(id);
+          if (!target) return;
+          e.preventDefault();
+          if (lenis) { lenis.scrollTo(target, { offset: -64 }); }
+          else { target.scrollIntoView({ behavior: 'smooth' }); }
+          // close mobile menu
+          document.getElementById('mobile-menu').classList.remove('open');
+        });
+      });
+
+      /* ---------- Typed.js ---------- */
+      if (window.Typed) {
+        new Typed('#typed', {
+          strings: ['AI Developer', 'Web Builder', 'Problem Solver', 'Future PM'],
+          typeSpeed: 65,
+          backSpeed: 35,
+          backDelay: 1600,
+          startDelay: 600,
+          loop: true,
+          smartBackspace: true
+        });
+      }
+
+      /* ---------- GSAP animations ---------- */
+      if (window.gsap) {
+        if (window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
+
+        // Hero load sequence
+        var tl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 0.8 } });
+        tl.fromTo('#hero-avatar', { opacity: 0, y: 30 }, { opacity: 1, y: 0, delay: 0.2 })
+          .fromTo('#hero-label', { opacity: 0, y: 20 }, { opacity: 1, y: 0 }, '-=0.5')
+          .fromTo('#hero-name', { opacity: 0, y: 30 }, { opacity: 1, y: 0 }, '-=0.4')
+          .fromTo('#hero-typed-wrap', { opacity: 0, y: 20 }, { opacity: 1, y: 0 }, '-=0.4')
+          .fromTo('#hero-bio', { opacity: 0, y: 20 }, { opacity: 1, y: 0 }, '-=0.4')
+          .fromTo('#hero-cta .reveal', { opacity: 0, y: 20 }, { opacity: 1, y: 0, stagger: 0.15 }, '-=0.3');
+
+        if (window.ScrollTrigger) {
+          // About stats
+          gsap.to('#about-stats .reveal', {
+            opacity: 1, y: 0, duration: 0.7, stagger: 0.1, ease: 'power3.out',
+            scrollTrigger: { trigger: '#about-stats', start: 'top 85%' },
+            onStart: function () {}, // ensure visible
+          });
+          gsap.fromTo('#about-stats .reveal', { y: 40 }, {
+            y: 0, duration: 0.7, stagger: 0.1, ease: 'power3.out',
+            scrollTrigger: { trigger: '#about-stats', start: 'top 85%' }
+          });
+
+          // Project cards
+          gsap.to('#projects-featured .reveal, #projects-more .reveal', {
+            opacity: 1, y: 0, duration: 0.7, stagger: 0.12, ease: 'power3.out',
+            scrollTrigger: { trigger: '#projects', start: 'top 80%' }
+          });
+          gsap.fromTo('#projects-featured .reveal, #projects-more .reveal', { y: 40 }, {
+            y: 0, duration: 0.7, stagger: 0.12, ease: 'power3.out',
+            scrollTrigger: { trigger: '#projects', start: 'top 80%' }
+          });
+
+          // Achievements slide from left
+          gsap.to('#achievement-grid .reveal', {
+            opacity: 1, x: 0, duration: 0.7, stagger: 0.1, ease: 'power3.out',
+            scrollTrigger: { trigger: '#achievement-grid', start: 'top 85%' }
+          });
+          gsap.fromTo('#achievement-grid .reveal', { x: -40 }, {
+            x: 0, duration: 0.7, stagger: 0.1, ease: 'power3.out',
+            scrollTrigger: { trigger: '#achievement-grid', start: 'top 85%' }
+          });
+
+          // Skill tags pop in
+          gsap.to('#skills .reveal', {
+            opacity: 1, scale: 1, duration: 0.45, stagger: 0.05, ease: 'back.out(1.6)',
+            scrollTrigger: { trigger: '#skills', start: 'top 80%' }
+          });
+          gsap.fromTo('#skills .reveal', { scale: 0.7 }, {
+            scale: 1, duration: 0.45, stagger: 0.05, ease: 'back.out(1.6)',
+            scrollTrigger: { trigger: '#skills', start: 'top 80%' }
+          });
+
+          // Timeline items fade in sequentially
+          gsap.to('#experience .reveal', {
+            opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out',
+            scrollTrigger: { trigger: '#experience', start: 'top 82%' }
+          });
+          gsap.fromTo('#experience .reveal', { y: 30 }, {
+            y: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out',
+            scrollTrigger: { trigger: '#experience', start: 'top 82%' }
+          });
+        }
+      } else {
+        // No GSAP fallback: just reveal everything
+        document.querySelectorAll('.reveal').forEach(function (el) { el.style.opacity = 1; });
+      }
+
+      /* ---------- Active nav link via IntersectionObserver ---------- */
+      var sections = ['about', 'projects', 'achievements', 'skills', 'experience', 'contact'];
+      var navLinks = document.querySelectorAll('.nav-link[data-nav]');
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            var id = entry.target.id;
+            navLinks.forEach(function (link) {
+              link.classList.toggle('active', link.getAttribute('data-nav') === id);
+            });
+          }
+        });
+      }, { rootMargin: '-45% 0px -50% 0px' });
+      sections.forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) observer.observe(el);
+      });
+
+      /* ---------- Hamburger ---------- */
+      var hamburger = document.getElementById('hamburger');
+      var mobileMenu = document.getElementById('mobile-menu');
+      if (hamburger) {
+        hamburger.addEventListener('click', function () {
+          mobileMenu.classList.toggle('open');
+        });
+      }
+    });
+  </script>
+</body>
+</html>
