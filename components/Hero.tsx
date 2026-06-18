@@ -3,9 +3,9 @@
 import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, Download } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/icons";
-import { GITHUB_URL, LINKEDIN_URL, CV_URL } from "@/lib/data";
+import { GITHUB_URL, LINKEDIN_URL } from "@/lib/data";
 
 // The AI response, streamed word by word. Each block becomes one line/paragraph.
 const RESPONSE: { el: "h1" | "p"; text: string; className: string }[] = [
@@ -114,11 +114,7 @@ export default function Hero() {
         />
       </div>
 
-      {/* Tiny corner stat (outside the panel) */}
-      <div className="pointer-events-none absolute left-6 top-20 z-10 font-mono text-[11px] tracking-wide text-white/25 sm:left-8">
-        GPA: 3.95 · SCHOLARSHIP ACTIVE
-      </div>
-<br />
+      <br />
       <div className="container-x grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] mt-8">
         {/* ---------- AI inference panel (left, ~55%) ---------- */}
         <motion.div
