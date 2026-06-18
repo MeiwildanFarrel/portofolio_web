@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { NAV_LINKS, PROFILE } from "@/lib/data";
+import { NAV_LINKS } from "@/lib/data";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
