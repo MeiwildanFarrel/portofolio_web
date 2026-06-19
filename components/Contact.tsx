@@ -11,11 +11,26 @@ export default function Contact() {
   const [sent, setSent] = useState(false);
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    // UI-only demo. TODO: wire to an email service / API route.
-    setSent(true);
-    setTimeout(() => setSent(false), 3500);
-  }
+  e.preventDefault();
+
+  const form = e.currentTarget;
+  const formData = new FormData(form);
+  const name = formData.get("name") as string;
+  const email = formData.get("email") as string;
+  const message = formData.get("message") as string;
+
+  const subject = `Project Inquiry from ${name}`;
+  const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+
+  const mailtoLink = `mailto:${EMAIL}?subject=${encodeURIComponent(
+    subject
+  )}&body=${encodeURIComponent(body)}`;
+
+  window.location.href = mailtoLink;
+
+  setSent(true);
+  setTimeout(() => setSent(false), 3500);
+}
 
   return (
     <section id="contact" className="bg-secondary py-24 sm:py-28">
